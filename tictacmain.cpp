@@ -66,13 +66,15 @@ void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
  *
  * */
 
-int validate_move(char usr_move, char tic_tac_board_state[3][3],char player_code);
+bool validate_move(char usr_move, char tic_tac_board_state[3][3],char player_code);
 
 /**
- * Utility function that converts a char[] to an int[]
- * using elements in from the input char[]
+ * Utility function that converts a char
+ * representing a user's move to an int[]
+ * representing the matching index in the board
+ * 
  * **/
-int* parse_char_move_to_int_index(const char move[6]);
+int* get_move_index(char chr_move);
 
 
 
@@ -160,27 +162,19 @@ int main(){
 	cout << " ============ START =============== \n"<<endl;
 
 	draw_board(board_state);
+	
+	cout<<"+++++++++++++++++++++"<<endl;
+	cout<<"| ROUND ONE |"<<endl;
+	cout<<"*********************"<<endl;
 
 	cout<<"======== Player Xs Move ==========="<<endl;
 	get_player_move();
 
-	validate_move(player_move, board_state,human_player);
+	bool is_move_valid = validate_move(player_move, board_state,human_player);
 
-	draw_board(board_state);
+	if(!is_move_valid)
+		cout<<"You made an invalid move"<<endl;		
 
-//	board_state
-
-	//define rules to machine player
-
-	//check if one player has won
-
-	//check tie
-
-	//draw board before move
-
-	//draw board after move
-
-	//draw board at end of game with results summary
 
 }
 
@@ -194,8 +188,9 @@ void get_player_move(){
 }
 
 /**
-*Draws the board in its updated state on screen when called
-*@param board_state 3-D matrix
+* Draws the board in its updated state on screen when called
+*
+* @param board_state 3-D matrix
 ***/
 void draw_board(const char tic_tac_board_state[3][3]){
 
@@ -223,40 +218,33 @@ void draw_board(const char tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-int validate_move(char move,char board_state[3][3],char player_code){
+bool validate_move(char usr_move,char board_state[3][3],char player_code){
 	
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
 	 * if not used; call update_board_state(cell_index, and value to write)
 	 * **/
 
-	cout<<move<<endl;
+	int* move_index = get_move_index(usr_move);
+	int x = move_index[0];
+	int y = move_index[1];
 
-	for(int x = 0; x<3;x++){
-	
-		for(int y = 0; y<3;y++){
-	
-			if('x' == move && 'y' == move){
-				/**if(board_state[x][y] != "X" || board_state[x][y] != "O"){
-					update_board_state(board_state[x][y],player_code);
-				}else
-					cout<<"This index is already used, try a diffrent cell"<<endl;
-				break; **/
-			}
-
-
-		}
-	}
+	if(board_state[x][y] != 'X' && board_state[x][y] != 'O'){
+		board_state[x][y] = {player_code};
+		draw_board(board_state);
+		return true; 
+	}else
+		return false;
 }
 
-int* parse_char_move_to_int(char chr_move){
+int* get_move_index(char chr_move){
 	
 	usr_move[0] = 1;
 
 	switch(chr_move){
 		case 'A':
-			usr_move[0] = 1;
-			usr_move[1] = 2;
+			usr_move[0] = 0;
+			usr_move[1] = 0;
 		break;
 		case 'a':
 		break;
