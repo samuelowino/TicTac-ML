@@ -66,7 +66,7 @@ void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
  *
  * */
 
-int validate_move(char usr_move[2], char tic_tac_board_state[3][3],char player_code);
+int validate_move(char usr_move, char tic_tac_board_state[3][3],char player_code);
 
 /**
  * Utility function that converts a char[] to an int[]
@@ -88,11 +88,11 @@ void get_player_move();
 
 void updateBoard(int selected_point[2]);
 
-char human_player_code = 'X';
+char human_player = 'X';
 
-char machine_player_code = 'O';
+char machine_player = 'O';
 
-char player_move[2];
+char player_move = '-';
 
 int usr_move[2] = {0,0};
 
@@ -115,40 +115,40 @@ int main(){
 	cout<<"Player O [O] "<<endl;
 
 	cout<<"===================================================="<<endl;
-	cin.get(human_player_code);
+	cin.get(human_player);
 
-	switch(human_player_code){
+	switch(human_player){
 		case '0':
 			cout<<"Computer | X"<<endl;
 			cout<<"You are O "<<endl;
-			machine_player_code='X';
-			human_player_code = 'O';
+			machine_player ='X';
+			human_player = 'O';
 		break;
 
 		case 'X':
 			cout<<"You are [Xs]"<<endl;
 			cout<<"Computer is [Os]"<<endl;
-			machine_player_code='O';
+			machine_player = 'O';
 
 		break;
 
 		case 'x':
 			cout<<"you are [Xs]"<<endl;
 			cout<<"computer is [Os]"<<endl;
-			machine_player_code='O';
+			machine_player = 'O';
 
 		break;
 
 		case 'o':
 			cout<<"you are [Os]"<<endl;
 			cout<<"Computer is [Xs]"<<endl;
-			human_player_code='O';
-			machine_player_code='X';
+			human_player = 'O';
+			machine_player = 'X';
 
 		case 'O':
 			cout<<"You are [Os]"<<endl;
 			cout<<"Computer is [Xs]"<<endl;
-			machine_player_code='X';
+			machine_player = 'X';
 		break;
 
 		default:
@@ -163,9 +163,8 @@ int main(){
 
 	cout<<"======== Player Xs Move ==========="<<endl;
 	get_player_move();
-	//cin.get(player_move,2);
 
-	validate_move(player_move, board_state,'X');
+	validate_move(player_move, board_state,human_player);
 
 	draw_board(board_state);
 
@@ -188,10 +187,10 @@ int main(){
 
 void get_player_move(){
 	cin.ignore();
-	cin.get(player_move,6);
-	cout<<"Before 2nd ignore move == ["<<player_move[0]<<"] ["<<player_move[2]<<"]"<<endl;
+	cin.get(player_move);
 	cin.ignore();
-	cout<<"After 2nd ignore move == ["<<player_move[0]<<"] ["<<player_move[2]<<"]"<<endl;
+
+	cout<<"Player Entered ["<<player_move<<endl;
 }
 
 /**
@@ -224,20 +223,20 @@ void draw_board(const char tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-int validate_move(char move[2],char board_state[3][3],char player_code){
+int validate_move(char move,char board_state[3][3],char player_code){
 	
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
 	 * if not used; call update_board_state(cell_index, and value to write)
 	 * **/
 
-	cout<<move[0]<<endl;
+	cout<<move<<endl;
 
 	for(int x = 0; x<3;x++){
 	
 		for(int y = 0; y<3;y++){
 	
-			if(x == move[0] && y == move[1]){
+			if('x' == move && 'y' == move){
 				/**if(board_state[x][y] != "X" || board_state[x][y] != "O"){
 					update_board_state(board_state[x][y],player_code);
 				}else
@@ -250,12 +249,14 @@ int validate_move(char move[2],char board_state[3][3],char player_code){
 	}
 }
 
-int* parse_char_move_to_int(const char chr_move){
+int* parse_char_move_to_int(char chr_move){
 	
 	usr_move[0] = 1;
 
 	switch(chr_move){
 		case 'A':
+			usr_move[0] = 1;
+			usr_move[1] = 2;
 		break;
 		case 'a':
 		break;
