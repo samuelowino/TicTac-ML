@@ -26,7 +26,7 @@ const int P9[2] = {3,2};
  * 	T - Players are in a tie
  * 	N - None of the players won
  * */
-char check_winning_player(const string tic_tac_board_state[3][3]);
+char check_winning_player(const char tic_tac_board_state[3][3]);
 
 /**
  * Defines playing rules and strategies
@@ -45,9 +45,9 @@ char check_winning_player(const string tic_tac_board_state[3][3]);
  * Maps the specified cell index with the player code
  *
  * **/
-void update_board_state(const string cell_index[3][3],const char& player_code);
+void update_board_state(const char cell_index[2],const char& player_code);
 
-void outline_strategy_to_machine_player(const string tic_tac_board_state[3][3]);
+void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
 
 /**
  * Validate move and reverse if neccessary
@@ -66,28 +66,38 @@ void outline_strategy_to_machine_player(const string tic_tac_board_state[3][3]);
  *
  * */
 
-int validate_move(const char  move[2], const string tic_tac_board_state[3][3]);
+int validate_move(const char  move[2], const char tic_tac_board_state[3][3]);
 
 /**
-*Draws the board in its updated state on screen when called
-*@param board_state 3-D matrix
+ * Utility function that converts a char[] to an int[]
+ * using elements in from the input char[]
+ * **/
+int* parse_char_move_to_int_index(const char move[6]);
+
+
+
+/**
+ *
+* Draws the board in its updated state on screen when called
+*
+* @param board_state 3-D matrix
 ***/
-void draw_board(const string tic_tac_board_state[3][3]);
+void draw_board(const char tic_tac_board_state[3][3]);
 
 void get_player_move();
 
-void updateBoard(string slected_point);
+void updateBoard(int selected_point[2]);
 
 char human_player_code = 'X';
 
 char machine_player_code = 'O';
 
-char player_move[6];
+char player_move[2];
 
-string board_state[3][3] = {
-	{"0,0","0,1","0,2"},
-	{"1,0","1,1","1,2"},
-	{"2,0","2,1","2,2"}
+char board_state[3][3] = {
+	{'A','B','C'},
+	{'D','E','F'},
+	{'G','H','I'}
 };
 
 
@@ -117,21 +127,21 @@ int main(){
 			cout<<"You are [Xs]"<<endl;
 			cout<<"Computer is [Os]"<<endl;
 			machine_player_code='O';
-		
+
 		break;
 
 		case 'x':
 			cout<<"you are [Xs]"<<endl;
 			cout<<"computer is [Os]"<<endl;
 			machine_player_code='O';
-				 
+
 		break;
-		
+
 		case 'o':
 			cout<<"you are [Os]"<<endl;
 			cout<<"Computer is [Xs]"<<endl;
 			human_player_code='O';
-			machine_player_code='X';	
+			machine_player_code='X';
 
 		case 'O':
 			cout<<"You are [Os]"<<endl;
@@ -157,7 +167,7 @@ int main(){
 
 	draw_board(board_state);
 
-//	board_state 
+//	board_state
 
 	//define rules to machine player
 
@@ -177,7 +187,7 @@ int main(){
 void get_player_move(){
 	cin.ignore();
 	cin.get(player_move,6);
-	cout<<"Before 2nd ignore move == ["<<player_move[0]<<"] ["<<player_move[2]<<"]"<<endl; 
+	cout<<"Before 2nd ignore move == ["<<player_move[0]<<"] ["<<player_move[2]<<"]"<<endl;
 	cin.ignore();
 	cout<<"After 2nd ignore move == ["<<player_move[0]<<"] ["<<player_move[2]<<"]"<<endl;
 }
@@ -186,7 +196,7 @@ void get_player_move(){
 *Draws the board in its updated state on screen when called
 *@param board_state 3-D matrix
 ***/
-void draw_board(const string tic_tac_board_state[3][3]){
+void draw_board(const char tic_tac_board_state[3][3]){
 
 	for(int i = 0; i<3;i++){
 
@@ -196,9 +206,9 @@ void draw_board(const string tic_tac_board_state[3][3]){
 
 			cout<<" | ";
 
-			if(tic_tac_board_state[i][j] == "X"){
+			if(tic_tac_board_state[i][j] == 'X'){
 				cout<<" X ";
-			}else if(tic_tac_board_state[i][j] == "O"){
+			}else if(tic_tac_board_state[i][j] == 'O'){
 				cout<<" O ";
 			}else
 				cout<<" "<<tic_tac_board_state[i][j]<<" ";
@@ -212,58 +222,72 @@ void draw_board(const string tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-int validate_move(const char move[6], const string board_state[3][3],char& player_code){
+int validate_move(const int move[2], const char board_state[3][3],char& player_code){
 	cout<<move[1]<<endl;
 	string existing_value;
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
 	 * if not used; call update_board_state(cell_index, and value to write)
 	 * **/
-	
-	for(int i = 0; i<3;i++){
+i
+	for(int x = 0; x<3;x++){
 	//column
-		
-		for(int j = 0; j<3;j++){
+
+		for(int y = 0; y<3;y++){
 			//row
-			if(j = move[2] && i = move[0]){
-				if(board_state[i][j] != "X" && board_state[i][j] != "O"){
+			if(x = move[0] && y = move[1]){
+				if(board_state[i][j] != "X" || board_state[i][j] != "O"){
 					update_board_state(board_state[i][j],player_code);
 				}else
 					cout<<"This index is already used, try a diffrent cell"<<endl;
 				break;
-			}		
+			}
 
 
 		}
 	}
+}
 
-	/**
+int* parse_char_move_to_int(const char move){
+	
+	switch(move){
+		case 'A':
+			return [0][0];
+		break;
+		case 'a':
+		break;
+		case 'B':
+		break;
+		case 'b':
+		break;
+		case 'C':
+		break;
+		case 'c':
+		break;
+		case 'D':
+		break;
+		case 'd':
+		break;
+		case 'E':
+		break;
+		case 'e':
+		break;
+		case 'F':
+		break;
+		case 'f':
+		break;
+		case 'G':
+		break;
+		case 'g':
+		break;
+		case 'H':
+		break;
+		case 'h':
+		break;
+		case 'I':
+		break;
+		case 'i':
+		break;
 
-	if(move[1] == '0'){
-		existing_value = board_state[0][0];
-		cout<<"Existing value == " <<existing_value;
-	}else if(move[1] == '1'){
-		existing_value = board_state[0][1];
-		cout<<"Existing value == "<< existing_value;
 	}
-	else if(move[1] == '2'){
-		existing_value = board_state[0][2];
-		cout<<"Val =="<< existing_value;
-	}
-	else if (move[1] == '3'){
-		existing_value = board_state[1][0];
-		cout<<"val =="<< ex
-	}
-	else if (move[1] == '4'){
-	}
-	else if (move[1] == '5'){
-	}
-	else if (move[1] == '6'){
-	}
-	else if (move[1] == '7'){
-	}
-	else if (move[1] == '8'){
-	}else
-		cout<<"I dont know"; **/
-
 }
