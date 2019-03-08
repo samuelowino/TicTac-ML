@@ -66,7 +66,7 @@ void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
  *
  * */
 
-int validate_move(const char  move[2], const char tic_tac_board_state[3][3]);
+int validate_move(char usr_move[2], char tic_tac_board_state[3][3],char player_code);
 
 /**
  * Utility function that converts a char[] to an int[]
@@ -93,6 +93,8 @@ char human_player_code = 'X';
 char machine_player_code = 'O';
 
 char player_move[2];
+
+int usr_move[2] = {0,0};
 
 char board_state[3][3] = {
 	{'A','B','C'},
@@ -163,7 +165,7 @@ int main(){
 	get_player_move();
 	//cin.get(player_move,2);
 
-	validate_move(player_move, board_state);
+	validate_move(player_move, board_state,'X');
 
 	draw_board(board_state);
 
@@ -222,25 +224,25 @@ void draw_board(const char tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-int validate_move(const int move[2], const char board_state[3][3],char& player_code){
-	cout<<move[1]<<endl;
-	string existing_value;
+int validate_move(char move[2],char board_state[3][3],char player_code){
+	
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
 	 * if not used; call update_board_state(cell_index, and value to write)
 	 * **/
-i
-	for(int x = 0; x<3;x++){
-	//column
 
+	cout<<move[0]<<endl;
+
+	for(int x = 0; x<3;x++){
+	
 		for(int y = 0; y<3;y++){
-			//row
-			if(x = move[0] && y = move[1]){
-				if(board_state[i][j] != "X" || board_state[i][j] != "O"){
-					update_board_state(board_state[i][j],player_code);
+	
+			if(x == move[0] && y == move[1]){
+				/**if(board_state[x][y] != "X" || board_state[x][y] != "O"){
+					update_board_state(board_state[x][y],player_code);
 				}else
 					cout<<"This index is already used, try a diffrent cell"<<endl;
-				break;
+				break; **/
 			}
 
 
@@ -248,11 +250,12 @@ i
 	}
 }
 
-int* parse_char_move_to_int(const char move){
+int* parse_char_move_to_int(const char chr_move){
 	
-	switch(move){
+	usr_move[0] = 1;
+
+	switch(chr_move){
 		case 'A':
-			return [0][0];
 		break;
 		case 'a':
 		break;
@@ -290,4 +293,6 @@ int* parse_char_move_to_int(const char move){
 		break;
 
 	}
+
+	return usr_move;
 }
