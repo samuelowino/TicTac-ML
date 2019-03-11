@@ -246,39 +246,75 @@ int* get_move_index(char chr_move){
 			usr_move[0] = 0;
 			usr_move[1] = 0;
 		break;
+
 		case 'a':
+			usr_move[0] = 0;
+			usr_move[1] = 0;
 		break;
+
 		case 'B':
+			usr_move[0] = 1;
+			usr_move[1] = 0;
 		break;
 		case 'b':
+			usr_move[0] = 1;
+			usr_move[1] = 0;
 		break;
 		case 'C':
+			usr_move[0] = 2;
+			usr_move[1] = 0;
 		break;
 		case 'c':
+			usr_move[0] = 2;
+			usr_move[1] = 0;
 		break;
 		case 'D':
+			usr_move[0] = 1;
+			usr_move[1] = 0;
 		break;
 		case 'd':
+			usr_move[0] = 1;
+			usr_move[1] = 0;
 		break;
 		case 'E':
+			usr_move[0] = 1;
+			usr_move[1] = 1;
 		break;
 		case 'e':
+			usr_move[0] = 1;
+			usr_move[1] = 1;
 		break;
 		case 'F':
+			usr_move[0] = 1;
+			usr_move[1] = 2;
 		break;
 		case 'f':
+			usr_move[0] = 1;
+			usr_move[1] = 2;
 		break;
 		case 'G':
+			usr_move[0] = 2;
+			usr_move[1] = 0;
 		break;
 		case 'g':
+			usr_move[0] = 2;
+			usr_move[1] = 0;
 		break;
 		case 'H':
+			usr_move[0] = 2;
+			usr_move[1] = 1;
 		break;
 		case 'h':
+			usr_move[0] = 2;
+			usr_move[1] = 1;
 		break;
 		case 'I':
+			usr_move[0] = 2;
+			usr_move[1] = 2;
 		break;
 		case 'i':
+			usr_move[0] = 2;
+			usr_move[1] = 2;
 		break;
 
 	}
