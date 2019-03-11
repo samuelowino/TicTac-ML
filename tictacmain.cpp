@@ -136,6 +136,52 @@ bool validate_move(char usr_move,char board_state[3][3],char player_code){
 		return false;
 }
 
+//return  true if any row is crossed with simmilar player moves
+bool row_crossed(char board_state[][3]){
+	for ( int i=0; i<3; i++){
+	if( board_state[i][0] == board_state[i][1] && 
+		board_state[i][1] == board_state[i][2] && 
+		board_state[i][0] !=' '){
+		return (true);
+		}else
+		return (false);		
+	}
+	
+}
+
+//return true if any of the columns is crossed with simmilar player moves
+bool column_crossed( char board_state[][3]){
+	for ( int i=0; i<3; i++){
+	if( board_state[0][i] == board_state[1][i] &&
+		board_state[1][i] == board_state[2][i] &&
+		board_state[0][i] !=' '){
+		return (true);
+		}else
+		return (false);
+	}
+}
+/** check if any of the diagnals has 3 similar board labels **/
+bool diagonal_crossed(char board_state[][3]){
+		if(board_state[0][0] == board_state[1][1] &&
+		board_state[1][1] == board_state[2][2] &&
+		board_state[0][0]  !=' '){
+			return (true);
+			}else
+			return (false);
+ 
+		if(board_state[0][2] == board_state[1][1] &&
+			board_state[1][1] == board_state[2][0] &&
+			board_state[0][2] !=' '){
+			return (true);
+			}else
+			return (false);
+	
+}
+//check if game is over
+bool is_game_over(char board_stat){
+	return(row_crossed(board_state) || column_crossed(board_state) ||
+		diagonal_crossed(board_state) );
+}
 int* get_move_index(char chr_move){
 	
 	usr_move[0] = 1;
