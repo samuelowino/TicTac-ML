@@ -1,6 +1,12 @@
 #include <iostream>
 #include <string>
-#include "tictacheader.h"
+#include "include/tictacheader.h"
+
+char human_player = 'X';
+
+char machine_player = 'O';
+
+char player_move[2];
 
 using namespace std;
 
@@ -80,7 +86,7 @@ int main(){
 
 void get_player_move(){
 	cin.ignore();
-	cin.get(player_move);
+	cin.get(player_move,2);
 	cin.ignore();
 
 	cout<<"Player Entered ["<<player_move<<endl;
@@ -88,9 +94,10 @@ void get_player_move(){
 
 /**
 * Draws the board in its updated state on screen when called
-*
 * @param board_state 3-D matrix
-***/
+*
+**/
+
 void draw_board(const char tic_tac_board_state[3][3]){
 
 	for(int i = 0; i<3;i++){
@@ -117,7 +124,7 @@ void draw_board(const char tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-bool validate_move(char usr_move,char board_state[3][3],char player_code){
+bool validate_move(char usr_move[2],char board_state[3][3],char player_code){
 	
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
@@ -160,7 +167,11 @@ bool column_crossed( char board_state[][3]){
 		return (false);
 	}
 }
-/** check if any of the diagnals has 3 similar board labels **/
+
+/** 
+ * check if any of the diagnals has 3 
+ * similar board labels **/
+
 bool diagonal_crossed(char board_state[][3]){
 		if(board_state[0][0] == board_state[1][1] &&
 		board_state[1][1] == board_state[2][2] &&

@@ -61,7 +61,7 @@ void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
  *
  * */
 
-int validate_move(char usr_move[2], char tic_tac_board_state[3][3],char player_code);
+bool validate_move(char usr_move[2], char tic_tac_board_state[3][3],char player_code);
 
 /**
  * Utility function that converts a char[] to an int[]
@@ -79,15 +79,17 @@ int* parse_char_move_to_int_index(const char move[6]);
 ***/
 void draw_board(const char tic_tac_board_state[3][3]);
 
+/**
+ * Searches the board cells to 
+ * determine the player move index based on the
+ * selected board char value,in the range of  A... I.
+ *
+ * **/
+int* get_move_index(char chr_move);
+
 void get_player_move();
 
 void updateBoard(int selected_point[2]);
-
-char human_player_code = 'X';
-
-char machine_player_code = 'O';
-
-char player_move[2];
 
 int usr_move[2] = {0,0};
 
