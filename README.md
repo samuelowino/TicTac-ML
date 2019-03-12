@@ -1,6 +1,6 @@
 # TicTac-ML
 
-![alt text](https://github.com/samuelowino/biology-trivia/blob/master/app/src/main/res/drawable/puzzle_2.png)
+![alt text](https://github.com/samuelowino/TicTac-ML/blob/master/branding/tic-tac-toe.png)
 
 A tic tac toe game simulator built on c++ that comprises a Neural Network as an intelligent player. 
 This project aims to address the technicality involved in integrated NCPs (Non-character Players) in
