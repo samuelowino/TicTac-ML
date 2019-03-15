@@ -6,7 +6,7 @@ char human_player = 'X';
 
 char machine_player = 'O';
 
-char player_move[2];
+char player_move;
 
 using namespace std;
 
@@ -124,7 +124,7 @@ void draw_board(const char tic_tac_board_state[3][3]){
 	cout<<endl;
 }
 
-bool validate_move(char usr_move[2],char board_state[3][3],char player_code){
+bool validate_move(char usr_move,char board_state[3][3],char player_code){
 	
 	/**
 	 * Check if index is used; if used warn the user and re-run game play
