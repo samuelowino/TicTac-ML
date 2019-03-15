@@ -86,7 +86,7 @@ int main(){
 
 void get_player_move(){
 	cin.ignore();
-	cin.get(player_move,2);
+	cin.get(player_move);
 	cin.ignore();
 
 	cout<<"Player Entered ["<<player_move<<endl;
