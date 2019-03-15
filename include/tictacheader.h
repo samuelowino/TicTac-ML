@@ -61,7 +61,7 @@ void outline_strategy_to_machine_player(const char tic_tac_board_state[3][3]);
  *
  * */
 
-bool validate_move(char usr_move[2], char tic_tac_board_state[3][3],char player_code);
+bool validate_move(char usr_move, char tic_tac_board_state[3][3],char player_code);
 
 /**
  * Utility function that converts a char[] to an int[]
