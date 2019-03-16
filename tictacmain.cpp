@@ -61,6 +61,8 @@ int main(){
 		default:
 			cout<<"Computer is [Xs]"<<endl;
 			cout<<"You are [Os]"<<endl;
+			machine_player = 'X';
+			human_player = 'O';
 		break;
 	}
 
@@ -209,12 +211,12 @@ int* get_move_index(char chr_move){
 		break;
 
 		case 'B':
-			usr_move[0] = 1;
-			usr_move[1] = 0;
+			usr_move[0] = 0;
+			usr_move[1] = 1;
 		break;
 		case 'b':
-			usr_move[0] = 1;
-			usr_move[1] = 0;
+			usr_move[0] = 0;
+			usr_move[1] = 1;
 		break;
 		case 'C':
 			usr_move[0] = 2;
