@@ -61,6 +61,8 @@ int main(){
 		default:
 			cout<<"Computer is [Xs]"<<endl;
 			cout<<"You are [Os]"<<endl;
+			machine_player = 'X';
+			human_player = 'O';
 		break;
 	}
 
